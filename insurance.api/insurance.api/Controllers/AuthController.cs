@@ -29,15 +29,14 @@ namespace insurance.api.Controllers
         {
             userForRegisterDto.Username = userForRegisterDto.Username.ToLower();
 
-            // TODO: Verificar que el usuario exista
             if (await _repository.UserExists(userForRegisterDto.Username))
                 return BadRequest("Username already exists");
-            // Crear nuestro usuario en el repositorio
+            
             var userToCreate = new User
             {
                 Username = userForRegisterDto.Username
             };
-            // Retornamos un codigo de exito si todo salio bien
+
             var createdUser = await _repository.Register(userToCreate, userForRegisterDto.Password);
 
             return Ok(createdUser);
