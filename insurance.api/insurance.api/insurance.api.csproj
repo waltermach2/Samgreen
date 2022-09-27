@@ -7,7 +7,6 @@
   <ItemGroup>
     <Folder Include="DataAccess\" />
     <Folder Include="Dtos\" />
-    <Folder Include="Repositories\" />
   </ItemGroup>
 
   <ItemGroup>
