@@ -11,6 +11,8 @@ namespace insurance.api.Persistence
         public DbSet<Policy> Policy { get; set; }
         public DbSet<CoveringType> CoveringType { get; set; }
 
+        public DbSet<User> User { get; set; }
+
         //protected override void OnModelCreating(ModelBuilder builder)
         //{
         //    base.OnModelCreating(builder);
