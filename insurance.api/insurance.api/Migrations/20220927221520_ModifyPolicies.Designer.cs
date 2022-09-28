@@ -10,8 +10,8 @@ using insurance.api.Persistence;
 namespace insurance.api.Migrations
 {
     [DbContext(typeof(InsuranceDbContext))]
-    [Migration("20220927175809_UserEntity")]
-    partial class UserEntity
+    [Migration("20220927221520_ModifyPolicies")]
+    partial class ModifyPolicies
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,7 +46,7 @@ namespace insurance.api.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CoveringTypeId")
+                    b.Property<int>("CoveringTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -68,8 +68,6 @@ namespace insurance.api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CoveringTypeId");
 
                     b.ToTable("Policy");
                 });
@@ -93,15 +91,6 @@ namespace insurance.api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("insurance.api.Models.Policy", b =>
-                {
-                    b.HasOne("insurance.api.Models.CoveringType", "CoveringType")
-                        .WithMany()
-                        .HasForeignKey("CoveringTypeId");
-
-                    b.Navigation("CoveringType");
                 });
 #pragma warning restore 612, 618
         }

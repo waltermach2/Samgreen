@@ -1,8 +1,8 @@
 ﻿using insurance.api.Models;
 using insurance.api.Persistence;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace insurance.api.Repositories
@@ -14,26 +14,34 @@ namespace insurance.api.Repositories
         {
             _context = context;
         }
-        public void Add<T>(T entity) where T : class
+        public async Task<Policy> Register(Policy policy)
         {
-            _context.Add(entity);
+            // add object to the context
+            await _context.AddAsync(policy);
+            // Save
+            await _context.SaveChangesAsync();
+
+            return policy;
         }
+
         public void Delete<T>(T entity) where T : class
         {
             _context.Remove(entity);
-        }
-        public async Task<List<Policy>> GetAll()
-        {
-            return await _context.Policy.ToListAsync();
         }
         public async Task<bool> SaveAll()
         {
             return await _context.SaveChangesAsync() > 0;
         }
 
-        List<Policy> IPolicyRepository.GetAll()
+        public List<Policy> GetAll()
         {
-            throw new NotImplementedException();
+            return _context.Policy.ToList();
+        }
+        public async Task<Policy> GetPolicy(int id)
+        {
+            var policy = await _context.Policy.FirstOrDefaultAsync(u => u.Id == id);
+
+            return policy;
         }
     }
 }

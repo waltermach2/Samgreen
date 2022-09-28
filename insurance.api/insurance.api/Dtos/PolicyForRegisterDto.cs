@@ -1,16 +1,15 @@
 ﻿using System;
 
-namespace insurance.api.Models
+namespace insurance.api.Dtos
 {
-    public class Policy
+    public class PolicyForRegisterDto
     {
-        public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public DateTime InitialDate { get; set; }
         public int Period { get; set; }
-        public double Price { get; set; }
         public string RiskScale { get; set; }
+        public double Price { get; set; }
         public int CoveringTypeId { get; set; }
     }
 }

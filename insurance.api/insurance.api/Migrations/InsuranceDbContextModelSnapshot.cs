@@ -44,7 +44,7 @@ namespace insurance.api.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("CoveringTypeId")
+                    b.Property<int>("CoveringTypeId")
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -66,8 +66,6 @@ namespace insurance.api.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CoveringTypeId");
 
                     b.ToTable("Policy");
                 });
@@ -91,15 +89,6 @@ namespace insurance.api.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("insurance.api.Models.Policy", b =>
-                {
-                    b.HasOne("insurance.api.Models.CoveringType", "CoveringType")
-                        .WithMany()
-                        .HasForeignKey("CoveringTypeId");
-
-                    b.Navigation("CoveringType");
                 });
 #pragma warning restore 612, 618
         }

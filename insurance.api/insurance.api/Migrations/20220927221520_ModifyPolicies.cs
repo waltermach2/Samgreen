@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace insurance.api.Migrations
 {
-    public partial class FirstMigration : Migration
+    public partial class ModifyPolicies : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -33,32 +33,39 @@ namespace insurance.api.Migrations
                     Period = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     RiskScale = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CoveringTypeId = table.Column<int>(type: "int", nullable: true)
+                    CoveringTypeId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Policy", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Policy_CoveringType_CoveringTypeId",
-                        column: x => x.CoveringTypeId,
-                        principalTable: "CoveringType",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "IX_Policy_CoveringTypeId",
-                table: "Policy",
-                column: "CoveringTypeId");
+            migrationBuilder.CreateTable(
+                name: "User",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: true),
+                    PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_User", x => x.Id);
+                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
+                name: "CoveringType");
+
+            migrationBuilder.DropTable(
                 name: "Policy");
 
             migrationBuilder.DropTable(
-                name: "CoveringType");
+                name: "User");
         }
     }
 }

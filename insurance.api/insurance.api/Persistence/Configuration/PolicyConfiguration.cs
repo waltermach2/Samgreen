@@ -46,17 +46,17 @@ namespace insurance.api.Persistence.Configuration
             {
                 RiskScale riskScale = (RiskScale)values.GetValue(randomRiksScale.Next(values.Length));
 
-                policies.Add(new Policy
-                {
-                    Id = i,
-                    Name = $"Policy {i}",
-                    Description = $"Description Policy {i}",
-                    InitialDate = RandomDay(),
-                    Period = randomPeriod.Next(1, 12),
-                    Price = randomAmount.Next(10, 1000),
-                    RiskScale = riskScale.ToString(),
-                    CoveringType = new CoveringType { Type = "Stole", Percentage = randomPercentage.Next(1, 100) }
-                });
+                //policies.Add(new Policy
+                //{
+                //    Id = i,
+                //    Name = $"Policy {i}",
+                //    Description = $"Description Policy {i}",
+                //    InitialDate = RandomDay(),
+                //    Period = randomPeriod.Next(1, 12),
+                //    Price = randomAmount.Next(10, 1000),
+                //    RiskScale = riskScale.ToString(),
+                //    CoveringType = new CoveringType { Type = "Stole", Percentage = randomPercentage.Next(1, 100) }
+                //});
             }
 
             entityBuilder.HasData(policies);
