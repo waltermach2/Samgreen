@@ -3,24 +3,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace insurance.api.Migrations
 {
-    public partial class ModifyPolicies : Migration
+    public partial class ModifyPoliciesv2 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
-                name: "CoveringType",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Percentage = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CoveringType", x => x.Id);
-                });
-
             migrationBuilder.CreateTable(
                 name: "Policy",
                 columns: table => new
@@ -33,7 +19,7 @@ namespace insurance.api.Migrations
                     Period = table.Column<int>(type: "int", nullable: false),
                     Price = table.Column<double>(type: "float", nullable: false),
                     RiskScale = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CoveringTypeId = table.Column<int>(type: "int", nullable: false)
+                    CoveringPercentage = table.Column<double>(type: "float", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,9 +44,6 @@ namespace insurance.api.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
-                name: "CoveringType");
-
             migrationBuilder.DropTable(
                 name: "Policy");
 

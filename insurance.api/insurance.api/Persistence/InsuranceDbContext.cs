@@ -9,7 +9,6 @@ namespace insurance.api.Persistence
         public InsuranceDbContext(DbContextOptions<InsuranceDbContext> options) : base(options)
         { }
         public DbSet<Policy> Policy { get; set; }
-        public DbSet<CoveringType> CoveringType { get; set; }
 
         public DbSet<User> User { get; set; }
 

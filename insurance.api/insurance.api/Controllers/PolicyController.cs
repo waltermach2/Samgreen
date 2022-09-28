@@ -19,7 +19,7 @@ namespace insurance.api.Controllers
 
         [HttpPost("register")]
         public async Task<IActionResult> Register(PolicyForRegisterDto policyForRegisterDto)
-        {            
+        {
             var policyToCreate = new Policy
             {
                 Name = policyForRegisterDto.Name,
@@ -28,7 +28,7 @@ namespace insurance.api.Controllers
                 Period = policyForRegisterDto.Period,
                 RiskScale = policyForRegisterDto.RiskScale,
                 Price = policyForRegisterDto.Price,
-                CoveringTypeId = policyForRegisterDto.CoveringTypeId
+                CoveringPercentage = policyForRegisterDto.RiskScale == "High" ? 50 : policyForRegisterDto.CoveringPercentage
             };
 
             var Policy = await _repository.Register(policyToCreate);
@@ -47,7 +47,7 @@ namespace insurance.api.Controllers
             policyFromRepo.Period = policyForRegisterDto.Period;
             policyFromRepo.Price = policyForRegisterDto.Price;
             policyFromRepo.RiskScale = policyForRegisterDto.RiskScale;
-            policyFromRepo.CoveringTypeId = policyForRegisterDto.CoveringTypeId;
+            policyFromRepo.CoveringPercentage = policyForRegisterDto.CoveringPercentage;
 
             if (await _repository.SaveAll())
                 return NoContent();

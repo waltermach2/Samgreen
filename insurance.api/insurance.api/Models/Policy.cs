@@ -11,6 +11,6 @@ namespace insurance.api.Models
         public int Period { get; set; }
         public double Price { get; set; }
         public string RiskScale { get; set; }
-        public int CoveringTypeId { get; set; }
+        public double CoveringPercentage { get; set; }
     }
 }

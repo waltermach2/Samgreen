@@ -10,8 +10,8 @@ using insurance.api.Persistence;
 namespace insurance.api.Migrations
 {
     [DbContext(typeof(InsuranceDbContext))]
-    [Migration("20220927221520_ModifyPolicies")]
-    partial class ModifyPolicies
+    [Migration("20220928020020_ModifyPoliciesv2")]
+    partial class ModifyPoliciesv2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,24 +21,6 @@ namespace insurance.api.Migrations
                 .HasAnnotation("ProductVersion", "5.0.17")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("insurance.api.Models.CoveringType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<double>("Percentage")
-                        .HasColumnType("float");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("CoveringType");
-                });
-
             modelBuilder.Entity("insurance.api.Models.Policy", b =>
                 {
                     b.Property<int>("Id")
@@ -46,8 +28,8 @@ namespace insurance.api.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CoveringTypeId")
-                        .HasColumnType("int");
+                    b.Property<double>("CoveringPercentage")
+                        .HasColumnType("float");
 
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
